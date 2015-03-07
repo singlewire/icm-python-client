@@ -5,9 +5,18 @@ class ICMClient(Hammock):
     """Extends Hammock to easily create a client configured to make requests against InformaCast Mobile"""
 
     @classmethod
-    def create(cls, access_token=None, url='https://api.icmobile.singlewire.com/api/v1-DEV'):
+    def create(cls, access_token=None, url='https://api.icmobile.singlewire.com/api/v1-DEV', **kwargs):
         """Helper function to create a custom Hammock wrapper for InformaCast Mobile"""
-        return cls(url, headers={'Authorization': 'Bearer ' + access_token})
+        headers = {
+            'Authorization': 'Bearer ' + access_token,
+            'X-Client-Version': 'ICMPython 0.0.1'
+        }
+        if 'headers' in kwargs:
+            headers.update(kwargs['headers'])
+            kwargs['headers'] = headers
+        else:
+            kwargs['headers'] = headers
+        return cls(url, **kwargs)
 
     def __getattr__(self, name):
         """Overridden from Hammock to replace snake_case with kebab-case for unknown attributes"""

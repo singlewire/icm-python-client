@@ -19,7 +19,8 @@ Import the client:
 from icm_client import ICMClient
 ```
 
-Create an instance of the client:
+Create an instance of the client ([session](http://docs.python-requests.org/en/latest/user/advanced/#session-objects) 
+kwargs may also be provided):
 
 ```python
 icm_client = ICMClient.create('<My Access Token>')
@@ -32,11 +33,11 @@ Have fun!
 icm_client.users().GET().json()
 
 # Paginate through all users
-for user in icm_client.users().LIST()
+for user in icm_client.users().LIST():
     print user
     
 # Search for a user named Jim
-icm_client.users(params={'limit': 10, 'q': 'Jim'}).GET().json()
+icm_client.users().GET(params={'limit': 10, 'q': 'Jim'}).json()
 
 # Get a specific user
 icm_client.users('de7b51a0-5a1e-11e4-ab31-8a1d033dd637').GET().json()
