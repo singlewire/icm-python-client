@@ -1,0 +1,9 @@
+include requirements.txt
+include test-requirements.txt
+recursive-include tests *.py
+recursive-include icm_python_client *.py
+include setup.cfg
+include setup.py
+include README.md
+include README.rst
+

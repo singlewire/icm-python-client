@@ -7,7 +7,7 @@ local_file = lambda *f: \
 setup(
     name='icm-python-client',
     packages=['icm_python_client'],
-    version='0.0.2',
+    version='0.0.3',
     description='A simple python client for InformaCast Mobile based on requests and Hammock',
     long_description=local_file('README.rst'),
     author='Vincent Pizzo',
