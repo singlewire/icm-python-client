@@ -1,0 +1,2 @@
+httpretty>=0.8.8
+sure>=1.2.10

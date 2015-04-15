@@ -1,2 +1,2 @@
-hammock==0.2.4
-requests==2.5.3
+hammock>=0.2.4
+requests>=2.5.3

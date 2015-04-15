@@ -7,6 +7,10 @@ class ICMClient(Hammock):
     @classmethod
     def create(cls, access_token=None, url='https://api.icmobile.singlewire.com/api/v1-DEV', **kwargs):
         """Helper function to create a custom Hammock wrapper for InformaCast Mobile"""
+        if not access_token:
+            raise ValueError('Access token must be supplied')
+        if not url:
+            raise ValueError('URL must be supplied')
         headers = {
             'Authorization': 'Bearer ' + access_token,
             'X-Client-Version': 'ICMPython 0.0.1'
@@ -45,15 +49,22 @@ class ICMClient(Hammock):
             if next_token:
                 kwargs['params']['start'] = next_token
 
-            # Perform the request and get the json response
-            response = self._request('get', *args, **kwargs).json()
+            # Perform the request and get the response
+            response = self._request('get', *args, **kwargs)
+
+            # Validate that the response was a success before continuing
+            if response.status_code is not 200:
+                raise Exception('Received an invalid status code', response)
+
+            # Process the response body as json
+            response_json = response.json()
 
             # Yield all of the resources in the data array
-            for resource in response['data']:
+            for resource in response_json['data']:
                 yield resource
 
             # Extract the next token from the response
-            next_token = response['next']
+            next_token = response_json['next']
 
             # If there is no next token, stop paginating
             if not next_token:
