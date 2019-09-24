@@ -1,6 +1,6 @@
 # DEPRECATION NOTICE
 
-This library is now deprecated and no longer maintained. We recommend using a popular and active Ruby HTTP client such as [requests](https://github.com/kennethreitz/requests).
+This library is now deprecated and no longer maintained. We recommend using a popular and active Python HTTP client such as [requests](https://github.com/kennethreitz/requests).
 
 # InformaCast Mobile REST Python Client
 
